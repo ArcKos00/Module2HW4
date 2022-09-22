@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ObjectClassLibrary.Skills;
 using ObjectClassLibrary.Interfaces;
+using UnitControls;
+using SettingsFile;
 
 namespace ObjectClassLibrary.Units
 {
@@ -14,6 +16,7 @@ namespace ObjectClassLibrary.Units
         public Goblin(int damage, string name, int health)
             : base(health)
         {
+            UGenus = Genus.Goblin;
             Damage = damage;
             Name = name;
         }
@@ -22,6 +25,7 @@ namespace ObjectClassLibrary.Units
         {
             Console.WriteLine($"Виберите спообность которую использует {Name}: ");
             Console.WriteLine("1-Heal, 2-Charge");
+            Unit[] units = UnitControl.GetInstance.Units;
             switch (Console.ReadKey().Key)
             {
                 case ConsoleKey.D1:
@@ -29,7 +33,13 @@ namespace ObjectClassLibrary.Units
                     {
                         if (spell is Heal)
                         {
-                            spell.Cast();
+                            Unit[] unitsToSkill = new Unit[4];
+                            for (int i = 0; i < unitsToSkill.Length; i++)
+                            {
+                                unitsToSkill[i] = units[new Random().Next(0, Settings.CountEnemy)];
+                            }
+
+                            spell.Cast(unitsToSkill);
                         }
                     }
 
@@ -39,7 +49,8 @@ namespace ObjectClassLibrary.Units
                     {
                         if (spell is Charge)
                         {
-                            spell.Cast();
+                            Unit target = units[new Random().Next(Settings.CountEnemy, units.Length)];
+                            spell.Cast(target);
                         }
                     }
 
@@ -47,12 +58,12 @@ namespace ObjectClassLibrary.Units
             }
         }
 
-        void IAttack.Attack(Unit target)
+        public void Attack(Unit target)
         {
             Console.WriteLine($"{Name} атакует {target.Name} с уроном {Damage}");
         }
 
-        void IMove.Move()
+        public override void Move()
         {
             Console.WriteLine($"{Name} идет со скоростью {Damage}");
         }

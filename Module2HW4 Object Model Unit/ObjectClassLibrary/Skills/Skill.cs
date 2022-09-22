@@ -13,7 +13,7 @@ namespace ObjectClassLibrary.Skills
         private TypeOfDamage _typeOfDamage;
         private int _damage;
 
-        public Skill(string name, TypeOfDamage type, int damage)
+        public Skill(int damage, string name, TypeOfDamage type)
         {
             SName = name;
             STypeOfDAmage = type;

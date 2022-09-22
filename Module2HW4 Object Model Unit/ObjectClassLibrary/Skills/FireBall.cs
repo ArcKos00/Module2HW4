@@ -12,8 +12,8 @@ namespace ObjectClassLibrary.Skills
     public class FireBall : Skill, IMono, IName
     {
         private int _decreace;
-        public FireBall(int decreace = 1, string name = "FireBall", TypeOfDamage type = TypeOfDamage.Magical, int damage = 10)
-            : base(name, type, damage)
+        public FireBall(int damage = 10, int decreace = 1, string name = "FireBall", TypeOfDamage type = TypeOfDamage.Magical)
+            : base(damage, name, type)
         {
             _decreace = decreace;
         }

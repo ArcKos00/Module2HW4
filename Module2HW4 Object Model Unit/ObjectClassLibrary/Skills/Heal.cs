@@ -12,7 +12,7 @@ namespace ObjectClassLibrary.Skills
     public sealed class Heal : Skill, IMore, IName
     {
         public Heal(int damage = 30, string name = "Heal", TypeOfDamage type = TypeOfDamage.Magical)
-            : base(name, type, damage)
+            : base(damage, name, type)
         {
         }
 

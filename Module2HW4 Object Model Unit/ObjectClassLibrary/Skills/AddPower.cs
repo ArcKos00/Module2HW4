@@ -11,8 +11,8 @@ namespace ObjectClassLibrary.Skills
 {
     public sealed class AddPower : Skill, IMore, IName
     {
-        public AddPower(string name = "AddPower", TypeOfDamage type = TypeOfDamage.Phisical, int damage = 5)
-            : base(name, type, damage)
+        public AddPower(int damage = 5, string name = "AddPower", TypeOfDamage type = TypeOfDamage.Phisical)
+            : base(damage, name, type)
         {
         }
 

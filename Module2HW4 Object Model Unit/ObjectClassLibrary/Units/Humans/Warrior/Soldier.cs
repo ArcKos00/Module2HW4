@@ -11,10 +11,10 @@ namespace ObjectClassLibrary.Units
     public class Soldier : Human, IMove, IAttack
     {
         private WeapSword _sword;
-        public Soldier(string name, int health, int damage, float speed, WeapSword sword)
+        public Soldier(string name, int health, int damage, int armor, float speed, WeapSword sword)
             : base(name, health, damage)
         {
-            Armor += 2;
+            Armor += armor;
             Speed *= speed;
             Damage += sword.WDamage;
             _sword = sword;
@@ -25,13 +25,14 @@ namespace ObjectClassLibrary.Units
             get { return _sword; }
         }
 
-        void IAttack.Attack(Unit target)
+        public override void Attack(Unit target)
         {
-            target.CurrentHealth -= Damage;
+            int damage = Damage - (target.Armor * 4 / 5);
+            target.CurrentHealth -= damage;
             Console.WriteLine($"{Name} атакует {target.Name} с уроном {Damage}");
         }
 
-        void IMove.Move()
+        public override void Move()
         {
             Console.WriteLine($"{Name} идёт со скоростью {Speed}");
         }

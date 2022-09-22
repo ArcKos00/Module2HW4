@@ -12,8 +12,8 @@ namespace ObjectClassLibrary.Skills
     public sealed class FrostBolt : Skill, IMono, IName
     {
         private float _decreace;
-        public FrostBolt(float decreace = 0.1f, string name = "FrostBolt", TypeOfDamage type = TypeOfDamage.Magical, int damage = 10)
-            : base(name, type, damage)
+        public FrostBolt(int damage = 10, float decreace = 0.1f, string name = "FrostBolt", TypeOfDamage type = TypeOfDamage.Magical)
+            : base(damage, name, type)
         {
             _decreace = decreace;
         }

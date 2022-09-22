@@ -12,7 +12,7 @@ namespace ObjectClassLibrary.Skills
     public sealed class Charge : Skill, IMono, IName
     {
         public Charge(int damage = 10, string name = "Charge", TypeOfDamage type = TypeOfDamage.Phisical)
-            : base(name, type, damage)
+            : base(damage, name, type)
         {
         }
 

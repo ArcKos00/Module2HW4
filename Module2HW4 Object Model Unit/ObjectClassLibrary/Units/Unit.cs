@@ -68,7 +68,7 @@ namespace ObjectClassLibrary.Units
             set { _damageType = value; }
         }
 
-        public void Move()
+        public virtual void Move()
         {
             Console.WriteLine($"Юнит ходит со скоростью {_speed}");
         }

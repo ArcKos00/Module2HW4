@@ -10,7 +10,6 @@ namespace ObjectClassLibrary.Units
 {
     public class Human : Unit, IMove, IAttack
     {
-
         public Human(string name, int health, int damage)
             : base(health)
         {
@@ -20,13 +19,14 @@ namespace ObjectClassLibrary.Units
             Name = name;
         }
 
-        public void Attack(Unit target)
+        public virtual void Attack(Unit target)
         {
-            target.CurrentHealth -= Damage;
+            int damage = Damage - (target.Armor * 4 / 5);
+            target.CurrentHealth -= damage;
             Console.WriteLine($"{Name} атакует {target.Name} с уроном {Damage}");
         }
 
-        void IMove.Move()
+        public override void Move()
         {
             Console.WriteLine($"{Name} идёт со скоростью {Speed}");
         }

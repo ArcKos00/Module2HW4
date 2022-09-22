@@ -11,20 +11,20 @@ namespace ObjectClassLibrary.Units
     public class MageStudent : Human, IMove, IAttack
     {
         private FireBall _spell = new FireBall();
-        public MageStudent(string name, int health, int damage)
+        public MageStudent(string name, int health, int damage, int armor)
             : base(name, health, damage)
         {
-            Armor += 1;
+            Armor += armor;
             DamageType = Weapons.TypeOfDamage.Magical;
         }
 
-        void IAttack.Attack(Unit target)
+        public override void Attack(Unit target)
         {
             Console.WriteLine($"{Name} кастует фаерболл в {target.Name} и наносит урон {_spell.SDamage}");
             _spell.Cast(target);
         }
 
-        void IMove.Move()
+        public override void Move()
         {
             Console.WriteLine($"{Name} идет со скоростью {Speed}");
         }

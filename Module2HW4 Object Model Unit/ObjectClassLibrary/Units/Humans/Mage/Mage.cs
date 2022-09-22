@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ObjectClassLibrary.Skills;
 using ObjectClassLibrary.Interfaces;
 using ObjectClassLibrary.Weapons;
+using SettingsFile;
+using UnitControls;
 
 namespace ObjectClassLibrary.Units
 {
@@ -13,27 +15,27 @@ namespace ObjectClassLibrary.Units
     {
         private WeapWizzardStaff _staff;
         private Skill[] _spells = new Skill[] { new FireBall(), new FrostBolt() };
-        public Mage(string name, int health, int damage, WeapWizzardStaff staff)
-            : base(name, health, damage)
+        public Mage(string name, int health, int damage, int armor, WeapWizzardStaff staff)
+            : base(name, health, damage, armor)
         {
             DamageType = TypeOfDamage.Phisical;
-            Armor += 1;
             Damage += staff.WDamage;
             _staff = staff;
         }
 
-        public void Cast()
+        public virtual void Cast()
         {
             Console.WriteLine($"{Name} исполнит заклинание: ");
             Console.WriteLine("1-FireBall, 2-FrostBolt");
+            Unit target = UnitControl.GetInstance.Units[new Random().Next(0, Settings.CountEnemy)];
             switch (Console.ReadKey().Key)
             {
                 case ConsoleKey.D1:
-                    foreach (IMore spell in _spells)
+                    foreach (IMono spell in _spells)
                     {
                         if (spell is FireBall)
                         {
-                            spell.Cast();
+                            spell.Cast(target);
                         }
                     }
 
@@ -43,7 +45,7 @@ namespace ObjectClassLibrary.Units
                     {
                         if (spell is FrostBolt)
                         {
-                            spell.Cast();
+                            spell.Cast(target);
                         }
                     }
 
@@ -51,12 +53,14 @@ namespace ObjectClassLibrary.Units
             }
         }
 
-        void IAttack.Attack(Unit target)
+        public override void Attack(Unit target)
         {
+            int damage = Damage - (target.Armor * 4 / 5);
+            target.CurrentHealth -= damage;
             Console.WriteLine($"{Name} тыкает палкой в {target.Name} и наносит урон {Damage}");
         }
 
-        void IMove.Move()
+        public override void Move()
         {
             Console.WriteLine($"{Name} идет со скоростью {Speed}");
         }
