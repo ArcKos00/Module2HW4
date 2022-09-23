@@ -2,14 +2,15 @@
 using ObjectClassLibrary.Interfaces;
 using ObjectClassLibrary.Skills;
 using ObjectClassLibrary.Weapons;
+using ObjectClassLibrary.Units.Enums;
 
 namespace ObjectClassLibrary.Units
 {
     public sealed class WarriorElite : Warrior, IMove, IAttack, ICast
     {
         private Skill[] _spells = new Skill[] { new Charge(), new AddPower() };
-        public WarriorElite(string name, int health, int damage, int armor, float speed, WeapSword sword)
-            : base(name, health, damage, armor, speed, sword)
+        public WarriorElite(string name, int health, int damage, int armor, float speed, WeapSword sword, UnitsType type)
+            : base(name, health, damage, armor, speed, sword, type)
         {
         }
 

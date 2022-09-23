@@ -16,8 +16,9 @@ namespace ObjectClassLibrary.Units
         private string _name;
         private UnitsType _type;
 
-        public Unit(int health)
+        public Unit(int health, UnitsType type)
         {
+            UnitType = type;
             _currentHealth = health;
             _health = health;
         }

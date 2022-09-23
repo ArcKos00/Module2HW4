@@ -2,6 +2,7 @@
 using ObjectClassLibrary.Interfaces;
 using ObjectClassLibrary.Weapons;
 using UnitControls;
+using ObjectClassLibrary.Units.Enums;
 
 namespace ObjectClassLibrary.Units
 {
@@ -9,8 +10,8 @@ namespace ObjectClassLibrary.Units
     {
         private WeapWizzardStaff _staff;
         private Skill[] _spells = new Skill[] { new FireBall(10), new FrostBolt(10) };
-        public Mage(string name, int health, int damage, int armor, WeapWizzardStaff staff)
-            : base(name, health, damage, armor)
+        public Mage(string name, int health, int damage, int armor, WeapWizzardStaff staff, UnitsType type)
+            : base(name, health, damage, armor, type)
         {
             DamageType = TypeOfDamage.Phisical;
             Damage += staff.WDamage;

@@ -2,14 +2,15 @@
 using ObjectClassLibrary.Skills;
 using ObjectClassLibrary.Weapons;
 using ObjectClassLibrary.Interfaces;
+using ObjectClassLibrary.Units.Enums;
 
 namespace ObjectClassLibrary.Units
 {
     public class Warrior : Soldier, IMove, IAttack, ICast
     {
         private readonly Charge _spell = new Charge();
-        public Warrior(string name, int health, int damage, int armor, float speed, WeapSword sword)
-            : base(name, health, damage, armor, speed, sword)
+        public Warrior(string name, int health, int damage, int armor, float speed, WeapSword sword, UnitsType type)
+            : base(name, health, damage, armor, speed, sword, type)
         {
         }
 

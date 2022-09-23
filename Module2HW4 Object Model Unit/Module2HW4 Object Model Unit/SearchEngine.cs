@@ -64,7 +64,7 @@ namespace Module2HW4_Object_Model_Unit
                     break;
             }
 
-            Console.ReadLine();
+            Console.ReadKey();
         }
 
         private static void SearchForUnit(this Unit[] units)
@@ -85,7 +85,7 @@ namespace Module2HW4_Object_Model_Unit
                     {
                         if (units[i] != null)
                         {
-                            if (units[i] is Goblin)
+                            if (units[i].UnitType == UnitsType.Goblin)
                             {
                                 Drawler.Draw(units[i]);
                             }
@@ -98,7 +98,7 @@ namespace Module2HW4_Object_Model_Unit
                     {
                         if (units[i] != null)
                         {
-                            if (units[i] is Human)
+                            if (units[i].UnitType == UnitsType.Human)
                             {
                                 Drawler.Draw(units[i]);
                             }
@@ -111,7 +111,7 @@ namespace Module2HW4_Object_Model_Unit
                     {
                         if (units[i] != null)
                         {
-                            if (units[i] is Soldier)
+                            if (units[i].UnitType == UnitsType.Soldier)
                             {
                                 Drawler.Draw(units[i]);
                             }
@@ -124,7 +124,7 @@ namespace Module2HW4_Object_Model_Unit
                     {
                         if (units[i] != null)
                         {
-                            if (units[i] is Warrior)
+                            if (units[i].UnitType == UnitsType.Warrior)
                             {
                                 Drawler.Draw(units[i]);
                             }
@@ -137,7 +137,7 @@ namespace Module2HW4_Object_Model_Unit
                     {
                         if (units[i] != null)
                         {
-                            if (units[i] is WarriorElite)
+                            if (units[i].UnitType == UnitsType.EliteWarrior)
                             {
                                 Drawler.Draw(units[i]);
                             }
@@ -150,7 +150,7 @@ namespace Module2HW4_Object_Model_Unit
                     {
                         if (units[i] != null)
                         {
-                            if (units[i] is MageStudent)
+                            if (units[i].UnitType == UnitsType.StudentMage)
                             {
                                 Drawler.Draw(units[i]);
                             }
@@ -163,7 +163,7 @@ namespace Module2HW4_Object_Model_Unit
                     {
                         if (units[i] != null)
                         {
-                            if (units[i] is Mage)
+                            if (units[i].UnitType == UnitsType.Mage)
                             {
                                 Drawler.Draw(units[i]);
                             }
@@ -176,7 +176,7 @@ namespace Module2HW4_Object_Model_Unit
                     {
                         if (units[i] != null)
                         {
-                            if (units[i] is UpperMage)
+                            if (units[i].UnitType == UnitsType.UpperMage)
                             {
                                 Drawler.Draw(units[i]);
                             }
@@ -186,11 +186,12 @@ namespace Module2HW4_Object_Model_Unit
                     break;
             }
 
-            Console.ReadLine();
+            Console.ReadKey();
         }
 
         private static void SearchForStats()
         {
+            Console.WriteLine();
             Console.WriteLine("Поиск по имени-1, поиск по атаке-2, поиск по количеству жизней-3, \nпоиск по броне-4, поиск по скорости передвижения-5");
             switch (Console.ReadKey().Key)
             {
@@ -211,11 +212,12 @@ namespace Module2HW4_Object_Model_Unit
                     break;
             }
 
-            Console.ReadLine();
+            Console.ReadKey();
         }
 
         private static void SearchForName()
         {
+            Console.WriteLine();
             Unit[] units = UnitControl.GetInstance.Units;
             Console.WriteLine("Введите имя для поиска: ");
             string? searchstr = Console.ReadLine();
@@ -233,6 +235,8 @@ namespace Module2HW4_Object_Model_Unit
 
         private static void SearchForDamage()
         {
+            Console.WriteLine();
+            Console.WriteLine("Введите значение поиска: ");
             Unit[] units = UnitControl.GetInstance.Units;
             int searchDamage = int.Parse(Console.ReadLine());
             Console.WriteLine("Введите направление поиска: \n1-меньше чем указано, \n2-поиск по этому значению, \n3-больше этого значения");
@@ -256,7 +260,7 @@ namespace Module2HW4_Object_Model_Unit
                     {
                         if (units[i] != null)
                         {
-                            if (units[i].Damage == searchDamage )
+                            if (units[i].Damage == searchDamage)
                             {
                                 Drawler.Draw(units[i]);
                             }
@@ -269,7 +273,7 @@ namespace Module2HW4_Object_Model_Unit
                     {
                         if (units[i] != null)
                         {
-                            if (units[i].Damage > searchDamage )
+                            if (units[i].Damage > searchDamage)
                             {
                                 Drawler.Draw(units[i]);
                             }
@@ -282,6 +286,8 @@ namespace Module2HW4_Object_Model_Unit
 
         private static void SearchForHealth()
         {
+            Console.WriteLine();
+            Console.WriteLine("Введите значение поиска: ");
             Unit[] units = UnitControl.GetInstance.Units;
             int searchHealth = int.Parse(Console.ReadLine());
             Console.WriteLine("Введите направление поиска: \n1-меньше чем указано, \n2-поиск по этому значению, \n3-больше этого значения");
@@ -331,6 +337,8 @@ namespace Module2HW4_Object_Model_Unit
 
         private static void SearchForArmor()
         {
+            Console.WriteLine();
+            Console.WriteLine("Введите значение поиска: ");
             Unit[] units = UnitControl.GetInstance.Units;
             int searchArmor = int.Parse(Console.ReadLine());
             Console.WriteLine("Введите направление поиска: \n1-меньше чем указано, \n2-поиск по этому значению, \n3-больше этого значения");
@@ -380,7 +388,9 @@ namespace Module2HW4_Object_Model_Unit
 
         private static void SearchForSpeed()
         {
+            Console.WriteLine();
             Unit[] units = UnitControl.GetInstance.Units;
+            Console.WriteLine("Введите значение поиска: ");
             Console.WriteLine("(Минимальная скоростьюнитов: 0.75, Максимальная скорость юнитов: 1)");
             float searchDamage = float.Parse(Console.ReadLine());
             Console.WriteLine("Введите направление поиска: \n1-меньше чем указано, \n2-поиск по этому значению, \n3-больше этого значения");

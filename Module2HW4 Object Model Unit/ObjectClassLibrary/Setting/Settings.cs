@@ -4,7 +4,7 @@ namespace ObjectClassLibrary.SettingsFiles
 {
     public static class Settings
     {
-        public static int CountEnemy { get; } = 1;
+        public static int CountEnemy { get; set; }
 
         // Goblin characteristic
         public static string GoblinName { get; } = "Гоблин";

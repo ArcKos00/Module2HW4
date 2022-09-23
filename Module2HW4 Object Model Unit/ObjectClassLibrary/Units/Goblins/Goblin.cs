@@ -7,10 +7,9 @@ namespace ObjectClassLibrary.Units
 {
     public class Goblin : Unit, IMove, IAttack, ICast
     {
-        
         private Skill[] _spells = new Skill[] { new Charge(20), new Heal() };
-        public Goblin(int damage, string name, int health, int armor)
-            : base(health)
+        public Goblin(int damage, string name, int health, int armor, UnitsType type)
+            : base(health, type)
         {
             Armor = armor;
             UGenus = Genus.Goblin;

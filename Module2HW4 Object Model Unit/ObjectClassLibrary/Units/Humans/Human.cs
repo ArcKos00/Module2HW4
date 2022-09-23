@@ -6,8 +6,8 @@ namespace ObjectClassLibrary.Units
 {
     public class Human : Unit, IMove, IAttack
     {
-        public Human(string name, int health, int damage)
-            : base(health)
+        public Human(string name, int health, int damage, UnitsType type)
+            : base(health, type)
         {
             DamageType = Weapons.TypeOfDamage.Phisical;
             Damage = damage;

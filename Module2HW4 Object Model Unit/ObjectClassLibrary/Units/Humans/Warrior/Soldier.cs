@@ -1,4 +1,5 @@
 ﻿using ObjectClassLibrary.Interfaces;
+using ObjectClassLibrary.Units.Enums;
 using ObjectClassLibrary.Weapons;
 
 namespace ObjectClassLibrary.Units
@@ -6,8 +7,8 @@ namespace ObjectClassLibrary.Units
     public class Soldier : Human, IMove, IAttack
     {
         private WeapSword _sword;
-        public Soldier(string name, int health, int damage, int armor, float speed, WeapSword sword)
-            : base(name, health, damage)
+        public Soldier(string name, int health, int damage, int armor, float speed, WeapSword sword, UnitsType type)
+            : base(name, health, damage, type)
         {
             Armor += armor;
             Speed *= speed;

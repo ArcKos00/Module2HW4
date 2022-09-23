@@ -1,13 +1,14 @@
 ﻿using ObjectClassLibrary.Skills;
 using ObjectClassLibrary.Interfaces;
+using ObjectClassLibrary.Units.Enums;
 
 namespace ObjectClassLibrary.Units
 {
     public class MageStudent : Human, IMove, IAttack
     {
         private FireBall _spell = new FireBall(5);
-        public MageStudent(string name, int health, int damage, int armor)
-            : base(name, health, damage)
+        public MageStudent(string name, int health, int damage, int armor, UnitsType type)
+            : base(name, health, damage, type)
         {
             Armor += armor;
             DamageType = Weapons.TypeOfDamage.Magical;

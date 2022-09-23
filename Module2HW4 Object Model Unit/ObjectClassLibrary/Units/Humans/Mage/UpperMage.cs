@@ -2,14 +2,15 @@
 using ObjectClassLibrary.Weapons;
 using ObjectClassLibrary.Interfaces;
 using UnitControls;
+using ObjectClassLibrary.Units.Enums;
 
 namespace ObjectClassLibrary.Units
 {
     public sealed class UpperMage : Mage, IMove, IAttack, ICast
     {
         private Skill[] _spells = new Skill[] { new FireBall(), new FrostBolt(15), new Heal(20) };
-        public UpperMage(string name, int health, int damage, int armor, WeapWizzardStaff staff)
-            : base(name, health, damage, armor, staff)
+        public UpperMage(string name, int health, int damage, int armor, WeapWizzardStaff staff, UnitsType type)
+            : base(name, health, damage, armor, staff, type)
         {
         }
 

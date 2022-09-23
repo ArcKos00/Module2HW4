@@ -36,6 +36,15 @@ namespace UnitControls
 
         private void RandomSpawner()
         {
+            if (_units.Length < 10)
+            {
+                Settings.CountEnemy = 1;
+            }
+            else
+            {
+                Settings.CountEnemy = _units.Length / 10;
+            }
+
             for (int i = 0; i < Settings.CountEnemy; i++)
             {
                 _units[i] = Spawner.Spawn(0);
