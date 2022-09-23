@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ObjectClassLibrary.Interfaces;
+﻿using ObjectClassLibrary.Interfaces;
 using ObjectClassLibrary.Units;
 using ObjectClassLibrary.Weapons;
 
@@ -18,8 +13,10 @@ namespace ObjectClassLibrary.Skills
 
         public void Cast(Unit[] target)
         {
+            Console.WriteLine();
             foreach (var unit in target)
             {
+                Console.WriteLine($"Восстанавливает жизни {unit.Name} количеством {SDamage}");
                 unit.CurrentHealth += SDamage;
             }
         }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ObjectClassLibrary.Skills;
+﻿using ObjectClassLibrary.Skills;
 using ObjectClassLibrary.Interfaces;
 using ObjectClassLibrary.Weapons;
-using SettingsFile;
 using UnitControls;
 
 namespace ObjectClassLibrary.Units
@@ -14,7 +8,7 @@ namespace ObjectClassLibrary.Units
     public class Mage : MageStudent, IMove, IAttack, ICast
     {
         private WeapWizzardStaff _staff;
-        private Skill[] _spells = new Skill[] { new FireBall(), new FrostBolt() };
+        private Skill[] _spells = new Skill[] { new FireBall(10), new FrostBolt(10) };
         public Mage(string name, int health, int damage, int armor, WeapWizzardStaff staff)
             : base(name, health, damage, armor)
         {
@@ -27,25 +21,49 @@ namespace ObjectClassLibrary.Units
         {
             Console.WriteLine($"{Name} исполнит заклинание: ");
             Console.WriteLine("1-FireBall, 2-FrostBolt");
-            Unit target = UnitControl.GetInstance.Units[new Random().Next(0, Settings.CountEnemy)];
+            Unit[] units = UnitControl.GetInstance.Units;
             switch (Console.ReadKey().Key)
             {
                 case ConsoleKey.D1:
-                    foreach (IMono spell in _spells)
+                    for (int i = 0; i < _spells.Length; i++)
                     {
-                        if (spell is FireBall)
+                        if (_spells[i] is IMono && _spells[i] is FireBall)
                         {
-                            spell.Cast(target);
+                            int rand = 0;
+                            while (true)
+                            {
+                                rand = new Random().Next(0, Settings.CountEnemy);
+                                if (units[rand] != null)
+                                {
+                                    break;
+                                }
+                            }
+
+                            Unit target = units[rand];
+                            (_spells[i] as IMono).Cast(target);
+                            break;
                         }
                     }
 
                     break;
                 case ConsoleKey.D2:
-                    foreach (IMono spell in _spells)
+                    for (int i = 0; i < _spells.Length; i++)
                     {
-                        if (spell is FrostBolt)
+                        if (_spells[i] is IMono && _spells[i] is FrostBolt)
                         {
-                            spell.Cast(target);
+                            int rand = 0;
+                            while (true)
+                            {
+                                rand = new Random().Next(0, Settings.CountEnemy);
+                                if (units[rand] != null)
+                                {
+                                    break;
+                                }
+                            }
+
+                            Unit target = units[rand];
+                            (_spells[i] as IMono).Cast(target);
+                            break;
                         }
                     }
 
@@ -57,7 +75,12 @@ namespace ObjectClassLibrary.Units
         {
             int damage = Damage - (target.Armor * 4 / 5);
             target.CurrentHealth -= damage;
-            Console.WriteLine($"{Name} тыкает палкой в {target.Name} и наносит урон {Damage}");
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+
+            Console.WriteLine($"{Name} тыкает палкой в {target.Name} и наносит урон {damage}");
         }
 
         public override void Move()

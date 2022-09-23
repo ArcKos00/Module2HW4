@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ObjectClassLibrary.Units;
+﻿using ObjectClassLibrary.Units;
 using ObjectClassLibrary.Weapons;
 using ObjectClassLibrary.Interfaces;
 
@@ -20,15 +15,14 @@ namespace ObjectClassLibrary.Skills
         {
             foreach (var target in targets)
             {
-                if ((int)target.UGenus == 0 || target.DamageType == TypeOfDamage.Phisical)
-                {
                     Cast(target);
-                }
             }
         }
 
         public void Cast(Unit target)
         {
+            Console.WriteLine();
+            Console.WriteLine($"Увеличивает урон {target.Name}");
             target.Damage += SDamage;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using ObjectClassLibrary.Interfaces;
+using ObjectClassLibrary.Units.Enums;
 using ObjectClassLibrary.Weapons;
 
 namespace ObjectClassLibrary.Units
@@ -13,6 +14,7 @@ namespace ObjectClassLibrary.Units
         private int _armor = 0;
         private float _speed = 1;
         private string _name;
+        private UnitsType _type;
 
         public Unit(int health)
         {
@@ -66,6 +68,12 @@ namespace ObjectClassLibrary.Units
         {
             get { return _damageType; }
             set { _damageType = value; }
+        }
+
+        public UnitsType UnitType
+        {
+            get { return _type; }
+            init { _type = value; }
         }
 
         public virtual void Move()

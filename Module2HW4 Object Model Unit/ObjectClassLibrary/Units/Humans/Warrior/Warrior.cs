@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SettingsFile;
-using UnitControls;
+﻿using UnitControls;
 using ObjectClassLibrary.Skills;
 using ObjectClassLibrary.Weapons;
 using ObjectClassLibrary.Interfaces;
@@ -21,15 +15,25 @@ namespace ObjectClassLibrary.Units
 
         public virtual void Cast()
         {
-            Unit target = UnitControl.GetInstance.Units[new Random().Next(0, Settings.CountEnemy)];
-            _spell.Cast(target);
+            Unit[] unit = UnitControl.GetInstance.Units;
+            int rand = 0;
+            while (true)
+            {
+                rand = new Random().Next(0, Settings.CountEnemy);
+                if (unit[rand] != null)
+                {
+                    break;
+                }
+            }
+
+            _spell.Cast(unit[rand]);
         }
 
         public override void Attack(Unit target)
         {
             int damage = Damage - (target.Armor * 4 / 5);
             target.CurrentHealth -= damage;
-            Console.WriteLine($"{Name} атакует {target.Name} с уроном {Damage}");
+            Console.WriteLine($"{Name} атакует {target.Name} с уроном {damage}");
         }
 
         public override void Move()

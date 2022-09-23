@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnitControls;
 using ObjectClassLibrary.Skills;
 using ObjectClassLibrary.Interfaces;
-using UnitControls;
-using SettingsFile;
+using ObjectClassLibrary.Units.Enums;
 
 namespace ObjectClassLibrary.Units
 {
     public class Goblin : Unit, IMove, IAttack, ICast
     {
+        
         private Skill[] _spells = new Skill[] { new Charge(20), new Heal() };
-        public Goblin(int damage, string name, int health)
+        public Goblin(int damage, string name, int health, int armor)
             : base(health)
         {
+            Armor = armor;
             UGenus = Genus.Goblin;
             Damage = damage;
             Name = name;
@@ -24,33 +21,54 @@ namespace ObjectClassLibrary.Units
         public void Cast()
         {
             Console.WriteLine($"Виберите спообность которую использует {Name}: ");
-            Console.WriteLine("1-Heal, 2-Charge");
+            Console.WriteLine("1-Charge, 2-Heal");
             Unit[] units = UnitControl.GetInstance.Units;
             switch (Console.ReadKey().Key)
             {
                 case ConsoleKey.D1:
-                    foreach (IMore spell in _spells)
+                    for (int i = 0; i < _spells.Length; i++)
                     {
-                        if (spell is Heal)
+                        if (_spells[i] is IMono && _spells[i] is Charge)
                         {
-                            Unit[] unitsToSkill = new Unit[4];
-                            for (int i = 0; i < unitsToSkill.Length; i++)
+                            int rand = 0;
+                            while (true)
                             {
-                                unitsToSkill[i] = units[new Random().Next(0, Settings.CountEnemy)];
+                                rand = new Random().Next(Settings.CountEnemy, units.Length);
+                                if (units[rand] != null)
+                                {
+                                    break;
+                                }
                             }
 
-                            spell.Cast(unitsToSkill);
+                            (_spells[i] as IMono).Cast(units[rand]);
+                            break;
                         }
                     }
 
                     break;
                 case ConsoleKey.D2:
-                    foreach (IMono spell in _spells)
+                    for (int i = 0; i < _spells.Length; i++)
                     {
-                        if (spell is Charge)
+                        if (_spells[i] is IMore && _spells[i] is Heal)
                         {
-                            Unit target = units[new Random().Next(Settings.CountEnemy, units.Length)];
-                            spell.Cast(target);
+                            Unit[] unitsToSkill = new Unit[4];
+                            for (int j = 0; j < unitsToSkill.Length; j++)
+                            {
+                                int rand = 0;
+                                while (true)
+                                {
+                                    rand = new Random().Next(0, Settings.CountEnemy);
+                                    if (units[rand] != null)
+                                    {
+                                        break;
+                                    }
+                                }
+
+                                unitsToSkill[j] = units[rand];
+                            }
+
+                            (_spells[i] as IMore).Cast(unitsToSkill);
+                            break;
                         }
                     }
 
@@ -60,7 +78,14 @@ namespace ObjectClassLibrary.Units
 
         public void Attack(Unit target)
         {
-            Console.WriteLine($"{Name} атакует {target.Name} с уроном {Damage}");
+            int damage = Damage - (target.Armor * 4 / 5);
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+
+            target.CurrentHealth -= damage;
+            Console.WriteLine($"{Name} атакует {target.Name} с уроном {damage}");
         }
 
         public override void Move()

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ObjectClassLibrary.Units;
+﻿using ObjectClassLibrary.Units;
 using ObjectClassLibrary.Weapons;
 using ObjectClassLibrary.Interfaces;
 
@@ -26,6 +21,8 @@ namespace ObjectClassLibrary.Skills
 
         public void Cast(Unit target)
         {
+            Console.WriteLine();
+            Console.WriteLine($"Наносит урон {target.Name} Фаерболом с уроном {SDamage}");
             target.Damage -= SubDamage;
             target.CurrentHealth -= SDamage;
         }

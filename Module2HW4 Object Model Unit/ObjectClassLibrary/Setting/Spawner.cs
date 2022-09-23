@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SettingsFile;
+﻿global using ObjectClassLibrary.SettingsFiles;
 using ObjectClassLibrary.Units;
 
-namespace UnitSpawner
+namespace ObjectClassLibrary.SettingsFiles
 {
     internal static class Spawner
     {
@@ -18,7 +13,8 @@ namespace UnitSpawner
                     return new Goblin(
                         Settings.GoblicDamage,
                         Settings.GoblinName,
-                        Settings.GoblinHealth);
+                        Settings.GoblinHealth,
+                        Settings.GoblinArmor);
                 case 1:
                     return new Human(
                         Settings.HumanName,

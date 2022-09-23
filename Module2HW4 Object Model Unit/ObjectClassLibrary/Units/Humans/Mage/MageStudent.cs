@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ObjectClassLibrary.Skills;
+﻿using ObjectClassLibrary.Skills;
 using ObjectClassLibrary.Interfaces;
 
 namespace ObjectClassLibrary.Units
 {
     public class MageStudent : Human, IMove, IAttack
     {
-        private FireBall _spell = new FireBall();
+        private FireBall _spell = new FireBall(5);
         public MageStudent(string name, int health, int damage, int armor)
             : base(name, health, damage)
         {

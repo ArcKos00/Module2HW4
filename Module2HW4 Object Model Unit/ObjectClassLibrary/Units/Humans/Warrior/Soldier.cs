@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ObjectClassLibrary.Interfaces;
+﻿using ObjectClassLibrary.Interfaces;
 using ObjectClassLibrary.Weapons;
 
 namespace ObjectClassLibrary.Units
@@ -29,7 +24,12 @@ namespace ObjectClassLibrary.Units
         {
             int damage = Damage - (target.Armor * 4 / 5);
             target.CurrentHealth -= damage;
-            Console.WriteLine($"{Name} атакует {target.Name} с уроном {Damage}");
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+
+            Console.WriteLine($"{Name} атакует {target.Name} с уроном {damage}");
         }
 
         public override void Move()

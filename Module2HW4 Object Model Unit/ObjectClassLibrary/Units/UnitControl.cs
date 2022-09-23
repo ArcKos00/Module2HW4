@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnitSpawner;
-using SettingsFile;
-using ObjectClassLibrary.Units;
+﻿using ObjectClassLibrary.Units;
 
 namespace UnitControls
 {
@@ -38,6 +31,7 @@ namespace UnitControls
         public Unit[] Units
         {
             get { return _units; }
+            set { _units = value; }
         }
 
         private void RandomSpawner()
@@ -50,6 +44,7 @@ namespace UnitControls
             for (int i = Settings.CountEnemy; i < _units.Length; i++)
             {
                 _units[i] = Spawner.Spawn(new Random().Next(1, 8));
+                _units[i].Name += i.ToString();
             }
         }
     }

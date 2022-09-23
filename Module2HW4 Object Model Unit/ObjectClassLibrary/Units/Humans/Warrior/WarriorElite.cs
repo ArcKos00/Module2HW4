@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnitControls;
 using ObjectClassLibrary.Interfaces;
 using ObjectClassLibrary.Skills;
 using ObjectClassLibrary.Weapons;
-using SettingsFile;
-using UnitControls;
 
 namespace ObjectClassLibrary.Units
 {
@@ -27,27 +21,50 @@ namespace ObjectClassLibrary.Units
             switch (Console.ReadKey().Key)
             {
                 case ConsoleKey.D1:
-                    foreach (IMore spell in _spells)
+                    for (int i = 0; i < _spells.Length; i++)
                     {
-                        if (spell is AddPower)
+                        if (_spells[i] is IMore && _spells[i] is AddPower)
                         {
                             Unit[] unitsToSkill = new Unit[4];
-                            for (int i = 0; i < unitsToSkill.Length; i++)
+                            for (int j = 0; j < unitsToSkill.Length; j++)
                             {
-                                unitsToSkill[i] = units[new Random().Next(Settings.CountEnemy, units.Length)];
+                                int rand = 0;
+                                while (true)
+                                {
+                                    rand = new Random().Next(Settings.CountEnemy, units.Length);
+                                    if (units[rand] != null)
+                                    {
+                                        break;
+                                    }
+                                }
+
+                                unitsToSkill[j] = units[rand];
                             }
 
-                            spell.Cast(unitsToSkill);
+                            (_spells[i] as IMore).Cast(unitsToSkill);
+                            break;
                         }
                     }
 
                     break;
                 case ConsoleKey.D2:
-                    foreach (IMono spell in _spells)
+                    for (int i = 0; i < _spells.Length; i++)
                     {
-                        if (spell is Charge)
+                        if (_spells[i] is IMono && _spells[i] is Charge)
                         {
-                            spell.Cast(units[new Random().Next(0, Settings.CountEnemy)]);
+                            int rand = 0;
+                            while (true)
+                            {
+                                rand = new Random().Next(Settings.CountEnemy, units.Length);
+                                if (units[rand] != null)
+                                {
+                                    break;
+                                }
+                            }
+
+                            Unit target = units[rand];
+                            (_spells[i] as IMono).Cast(target);
+                            break;
                         }
                     }
 
@@ -59,7 +76,12 @@ namespace ObjectClassLibrary.Units
         {
             int damage = Damage - (target.Armor * 4 / 5);
             target.CurrentHealth -= damage;
-            Console.WriteLine($"{Name} атакует {target.Name} с уроном {Damage}");
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+
+            Console.WriteLine($"{Name} атакует {target.Name} с уроном {damage}");
         }
 
         public override void Move()
