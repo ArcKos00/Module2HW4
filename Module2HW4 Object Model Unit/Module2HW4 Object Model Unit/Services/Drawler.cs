@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ObjectClassLibrary.Units;
 
-namespace Module2HW4_Object_Model_Unit
+namespace Module2HW4_Object_Model_Unit.Services
 {
     internal class Drawler
     {

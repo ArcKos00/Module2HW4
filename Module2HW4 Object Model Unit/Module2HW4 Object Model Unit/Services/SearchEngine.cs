@@ -2,7 +2,7 @@
 using ObjectClassLibrary.Units;
 using ObjectClassLibrary.Units.Enums;
 
-namespace Module2HW4_Object_Model_Unit
+namespace Module2HW4_Object_Model_Unit.Services
 {
     public static class SearchEngine
     {

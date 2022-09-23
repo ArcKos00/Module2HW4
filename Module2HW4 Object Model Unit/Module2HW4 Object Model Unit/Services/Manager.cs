@@ -3,7 +3,7 @@ using ObjectClassLibrary.Interfaces;
 using UnitControls;
 using ObjectClassLibrary.SettingsFiles;
 
-namespace Module2HW4_Object_Model_Unit
+namespace Module2HW4_Object_Model_Unit.Services
 {
     internal class Manager
     {
