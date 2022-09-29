@@ -43,6 +43,66 @@ namespace Module2HW4_Object_Model_Unit.Services
 
         private static void Caster()
         {
+            Unit[] units = ArrayToCast();
+
+            foreach (ICast cast in units)
+            {
+                cast.Cast();
+            }
+        }
+
+        private static void Attacker()
+        {
+            foreach (IAttack att in _units)
+            {
+                if (att == null)
+                {
+                    continue;
+                }
+
+                if (att is Goblin)
+                {
+                    GoblinAttacks(att);
+                }
+                else if (att is Human)
+                {
+                    HumanAttacks(att);
+                }
+            }
+        }
+
+        private static void GoblinAttacks(IAttack att)
+        {
+            int rand = 0;
+            while (true)
+            {
+                rand = new Random().Next(Settings.CountEnemy, _units.Length);
+                if (_units[rand] != null)
+                {
+                    break;
+                }
+            }
+
+            att.Attack(_units[rand]);
+        }
+
+        private static void HumanAttacks(IAttack att)
+        {
+            int rand = 0;
+            while (true)
+            {
+                rand = new Random().Next(0, Settings.CountEnemy);
+                if (_units[rand] != null)
+                {
+                    break;
+                }
+            }
+
+            att.Attack(_units[rand]);
+        }
+
+        private static Unit[] ArrayToCast()
+        {
             int counter = 0;
             for (int i = 0; i < _units.Length; i++)
             {
@@ -62,47 +122,7 @@ namespace Module2HW4_Object_Model_Unit.Services
                 }
             }
 
-            foreach (ICast cast in units)
-            {
-                cast.Cast();
-            }
-        }
-
-        private static void Attacker()
-        {
-            int rand = 0;
-            foreach (IAttack att in _units)
-            {
-                if (att != null)
-                {
-                    if (att is Goblin)
-                    {
-                        while (true)
-                        {
-                            rand = new Random().Next(Settings.CountEnemy, _units.Length);
-                            if (_units[rand] != null)
-                            {
-                                break;
-                            }
-                        }
-
-                        att.Attack(_units[rand]);
-                    }
-                    else if (att is Human)
-                    {
-                        while (true)
-                        {
-                            rand = new Random().Next(0, Settings.CountEnemy);
-                            if (_units[rand] != null)
-                            {
-                                break;
-                            }
-                        }
-
-                        att.Attack(_units[rand]);
-                    }
-                }
-            }
+            return units;
         }
     }
 }
