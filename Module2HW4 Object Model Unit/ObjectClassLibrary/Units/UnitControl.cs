@@ -47,12 +47,36 @@ namespace UnitControls
 
             for (int i = 0; i < Settings.CountEnemy; i++)
             {
-                _units[i] = Spawner.Spawn(0);
+                _units[i] = Spawner.SpawnGoblin();
             }
 
             for (int i = Settings.CountEnemy; i < _units.Length; i++)
             {
-                _units[i] = Spawner.Spawn(new Random().Next(1, 8));
+                switch (new Random().Next(0, 7))
+                {
+                    case 0:
+                        _units[i] = Spawner.SpawnHuman();
+                        break;
+                    case 1:
+                        _units[i] = Spawner.SpawnSoldier();
+                        break;
+                    case 2:
+                        _units[i] = Spawner.SpawnWarrior();
+                        break;
+                    case 3:
+                        _units[i] = Spawner.SpawnWarriorElite();
+                        break;
+                    case 4:
+                        _units[i] = Spawner.SpawnMageStudent();
+                        break;
+                    case 5:
+                        _units[i] = Spawner.SpawnMage();
+                        break;
+                    case 6:
+                        _units[i] = Spawner.SpawnUpperMage();
+                        break;
+                }
+
                 _units[i].Name += i.ToString();
             }
         }

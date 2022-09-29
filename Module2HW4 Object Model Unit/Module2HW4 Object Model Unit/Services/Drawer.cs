@@ -7,9 +7,9 @@ using ObjectClassLibrary.Units;
 
 namespace Module2HW4_Object_Model_Unit.Services
 {
-    internal class Drawler
+    internal class Drawer
     {
-        public static void Drawle(Unit[] units)
+        public static void DrawUnits(Unit[] units)
         {
             Console.Clear();
             for (int i = 0; i < units.Length; i++)

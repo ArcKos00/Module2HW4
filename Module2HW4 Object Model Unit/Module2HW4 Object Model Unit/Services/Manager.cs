@@ -12,7 +12,7 @@ namespace Module2HW4_Object_Model_Unit.Services
         {
             while (true)
             {
-                Drawler.Drawle(_units);
+                Drawer.DrawUnits(_units);
 
                 Console.WriteLine("Введите действие: \n 1-Выполнить атаку и каст юнитов, 2-начать поиск по юнитам");
                 switch (Console.ReadKey().Key)
