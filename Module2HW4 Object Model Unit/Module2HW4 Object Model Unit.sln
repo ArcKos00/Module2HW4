@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module2HW4", "Module2HW4 Object Model Unit\Module2HW4.csproj", "{79316004-DB37-4DD1-9A90-2E2A41D32B0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module2HW4", "Module2HW4 Object Model Unit\Module2HW4.csproj", "{79316004-DB37-4DD1-9A90-2E2A41D32B0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectClassLibrary", "ObjectClassLibrary\ObjectClassLibrary.csproj", "{0A56DAA1-2129-4ABB-BBD5-057812FCB52A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectClassLibrary", "ObjectClassLibrary\ObjectClassLibrary.csproj", "{0A56DAA1-2129-4ABB-BBD5-057812FCB52A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
